@@ -27,7 +27,7 @@ fun RecipeNavigation(modifier: Modifier = Modifier) {
     NavDisplay(
         backStack = backStack,
         modifier = modifier,
-        onBack = { backStack.removeLastOrNull() },
+        onBack = { backStack.lastOrNull()?.let(backStack::popIfTop) },
         entryDecorators = listOf(
             rememberSaveableStateHolderNavEntryDecorator(),
             // Gives each entry its own ViewModelStore, cleared when the entry is popped.
@@ -35,10 +35,10 @@ fun RecipeNavigation(modifier: Modifier = Modifier) {
         ),
         entryProvider = entryProvider {
             entry<RecipeList> {
-                RecipeListScreen(onRecipeClick = { id -> backStack.add(RecipeDetail(id)) })
+                RecipeListScreen(onRecipeClick = { id -> backStack.openRecipe(id) })
             }
             entry<RecipeDetail> { key ->
-                RecipeDetailScreen(recipeId = key.recipeId, onBack = { backStack.removeLastOrNull() })
+                RecipeDetailScreen(recipeId = key.recipeId, onBack = { backStack.popIfTop(key) })
             }
         },
     )

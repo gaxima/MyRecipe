@@ -39,6 +39,9 @@ class RecipeListViewModel @Inject constructor(
 
     private var searchJob: Job? = null
 
+    /** Params of the results currently on screen; restored when a refresh fails. */
+    private var shownParams: RecipeSearchParams = restoredParams
+
     init {
         search(restoredParams)
     }
@@ -66,11 +69,12 @@ class RecipeListViewModel @Inject constructor(
     /**
      * Runs a search, cancelling any in-flight one so a stale response never overwrites a newer one.
      * With results already on screen they stay visible ([RecipeListUiState.isSearching]) and a
-     * failure becomes a snackbar; otherwise the whole content area shows loading / error.
+     * failure becomes a snackbar, rolling the applied params back so the chips keep describing
+     * those results; otherwise the whole content area shows loading / error.
      */
     private fun search(params: RecipeSearchParams) {
         searchJob?.cancel()
-        savedStateHandle[SEARCH_PARAMS_KEY] = params.encode()
+        saveParams(params)
         _uiState.update { state ->
             val hasResults = state.results is RecipeResultsState.Success
             state.copy(
@@ -82,17 +86,23 @@ class RecipeListViewModel @Inject constructor(
         searchJob = viewModelScope.launch {
             repository.searchRecipes(params)
                 .onSuccess { recipes ->
+                    shownParams = params
                     _uiState.update { it.copy(results = RecipeResultsState.Success(recipes), isSearching = false) }
                 }
                 .onFailure { error ->
                     val message = error.toUserMessage()
                     if (_uiState.value.results is RecipeResultsState.Success) {
-                        _uiState.update { it.copy(isSearching = false) }
+                        saveParams(shownParams)
+                        _uiState.update { it.copy(appliedParams = shownParams, isSearching = false) }
                         _events.tryEmit(RecipeListEvent.ShowSnackbar(message))
                     } else {
                         _uiState.update { it.copy(results = RecipeResultsState.Error(message), isSearching = false) }
                     }
                 }
         }
+    }
+
+    private fun saveParams(params: RecipeSearchParams) {
+        savedStateHandle[SEARCH_PARAMS_KEY] = params.encode()
     }
 }

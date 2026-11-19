@@ -44,6 +44,7 @@
     <string name="instructions_label">Instructions contain</string>
     <string name="instructions_hint">e.g. oven, grill, wok</string>
     <string name="cd_remove_ingredient">Remove %s</string>
+    <string name="cd_add_ingredient">Add ingredient</string>
     <string name="reset">Reset</string>
     <string name="apply">Apply</string>
 

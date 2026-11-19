@@ -168,6 +168,31 @@ class RecipeListViewModelTest {
     }
 
     @Test
+    fun `failed refresh restores the params of the results on screen`() {
+        val handle = SavedStateHandle()
+        val vm = viewModel(handle)
+        repository.searchResult = Result.failure(IOException())
+
+        vm.onAction(RecipeListAction.ApplyFilters(RecipeSearchParams(vegetarianOnly = true)))
+
+        assertEquals(RecipeSearchParams(), vm.uiState.value.appliedParams)
+        assertEquals(emptyList<ActiveFilter>(), vm.uiState.value.activeFilters)
+        assertEquals(RecipeSearchParams(), decodeSearchParams(handle[SEARCH_PARAMS_KEY]!!))
+    }
+
+    @Test
+    fun `failed refresh keeps the typed text so the user can retry`() {
+        val vm = viewModel()
+        repository.searchResult = Result.failure(IOException())
+
+        vm.onAction(RecipeListAction.SearchTextChange("pasta"))
+        vm.onAction(RecipeListAction.Search)
+
+        assertEquals("pasta", vm.uiState.value.searchText)
+        assertEquals("", vm.uiState.value.appliedParams.query)
+    }
+
+    @Test
     fun `isSearching is true while a search is in flight with results shown`() {
         val vm = viewModel()
         val gate = CompletableDeferred<Unit>()

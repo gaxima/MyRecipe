@@ -59,22 +59,27 @@ fun FilterSheet(
         FilterSheetContent(
             draft = draft,
             onDraftChange = { draft = it },
-            onApply = { onApply(draft) },
+            onApply = onApply,
             onReset = { draft = draft.clearedFilters() },
             modifier = Modifier.imePadding(),
         )
     }
 }
 
-/** Stateless sheet body; the caller owns [draft]. */
+/**
+ * Sheet body; the caller owns [draft]. Only the half-typed ingredient texts are local, and
+ * **Apply** commits them too, so an ingredient typed without pressing Done is not lost.
+ */
 @Composable
 fun FilterSheetContent(
     draft: RecipeSearchParams,
     onDraftChange: (RecipeSearchParams) -> Unit,
-    onApply: () -> Unit,
+    onApply: (RecipeSearchParams) -> Unit,
     onReset: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var includeText by rememberSaveable { mutableStateOf("") }
+    var excludeText by rememberSaveable { mutableStateOf("") }
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -112,15 +117,25 @@ fun FilterSheetContent(
 
         IngredientInput(
             label = stringResource(R.string.include_label),
+            text = includeText,
+            onTextChange = { includeText = it },
             ingredients = draft.includeIngredients,
-            onAdd = { onDraftChange(draft.withIncluded(it)) },
+            onAdd = {
+                onDraftChange(draft.withIncluded(includeText))
+                includeText = ""
+            },
             onRemove = { onDraftChange(draft.copy(includeIngredients = draft.includeIngredients - it)) },
         )
 
         IngredientInput(
             label = stringResource(R.string.exclude_label),
+            text = excludeText,
+            onTextChange = { excludeText = it },
             ingredients = draft.excludeIngredients,
-            onAdd = { onDraftChange(draft.withExcluded(it)) },
+            onAdd = {
+                onDraftChange(draft.withExcluded(excludeText))
+                excludeText = ""
+            },
             onRemove = { onDraftChange(draft.copy(excludeIngredients = draft.excludeIngredients - it)) },
         )
 
@@ -141,8 +156,16 @@ fun FilterSheetContent(
                 .padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.End),
         ) {
-            TextButton(onClick = onReset) { Text(stringResource(R.string.reset)) }
-            Button(onClick = onApply) { Text(stringResource(R.string.apply)) }
+            TextButton(
+                onClick = {
+                    includeText = ""
+                    excludeText = ""
+                    onReset()
+                },
+            ) { Text(stringResource(R.string.reset)) }
+            Button(onClick = { onApply(draft.withPendingIngredients(includeText, excludeText)) }) {
+                Text(stringResource(R.string.apply))
+            }
         }
     }
 }

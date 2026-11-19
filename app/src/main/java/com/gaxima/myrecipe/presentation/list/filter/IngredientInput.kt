@@ -9,17 +9,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.InputChipDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -42,33 +40,41 @@ fun RecipeSearchParams.withExcluded(raw: String): RecipeSearchParams {
     return copy(excludeIngredients = excludeIngredients + name, includeIngredients = includeIngredients - name)
 }
 
+/** Commits ingredient text the user typed but did not add yet (no Done / + pressed). */
+fun RecipeSearchParams.withPendingIngredients(include: String, exclude: String): RecipeSearchParams =
+    withIncluded(include).withExcluded(exclude)
+
 /**
- * Text field that turns each entry into a removable chip when the keyboard's Done action is pressed.
+ * Text field that turns each entry into a removable chip via the keyboard's Done action or the
+ * trailing add button. The caller owns [text] so pending input can be committed on Apply.
  */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun IngredientInput(
     label: String,
+    text: String,
+    onTextChange: (String) -> Unit,
     ingredients: Set<String>,
-    onAdd: (String) -> Unit,
+    onAdd: () -> Unit,
     onRemove: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var text by rememberSaveable { mutableStateOf("") }
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         OutlinedTextField(
             value = text,
-            onValueChange = { text = it },
+            onValueChange = onTextChange,
             label = { Text(label) },
             placeholder = { Text(stringResource(R.string.ingredient_hint)) },
+            trailingIcon = {
+                if (text.isNotBlank()) {
+                    IconButton(onClick = onAdd) {
+                        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.cd_add_ingredient))
+                    }
+                }
+            },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    onAdd(text)
-                    text = ""
-                },
-            ),
+            keyboardActions = KeyboardActions(onDone = { onAdd() }),
             modifier = Modifier.fillMaxWidth(),
         )
         if (ingredients.isNotEmpty()) {

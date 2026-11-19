@@ -41,6 +41,21 @@ class IngredientInputTest {
     }
 
     @Test
+    fun `pending ingredient text is committed on apply`() {
+        val params = RecipeSearchParams().withPendingIngredients(include = "Rice ", exclude = "peanut")
+
+        assertEquals(setOf("rice"), params.includeIngredients)
+        assertEquals(setOf("peanut"), params.excludeIngredients)
+    }
+
+    @Test
+    fun `blank pending text commits nothing`() {
+        val params = RecipeSearchParams(includeIngredients = setOf("rice"))
+
+        assertEquals(params, params.withPendingIngredients(include = " ", exclude = ""))
+    }
+
+    @Test
     fun `blank input leaves params unchanged`() {
         val params = RecipeSearchParams(includeIngredients = setOf("rice"))
 

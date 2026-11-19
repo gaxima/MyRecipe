@@ -35,7 +35,7 @@ class FilterSheetTest {
                 FilterSheetContent(
                     draft = draft,
                     onDraftChange = { draft = it },
-                    onApply = { applied += draft },
+                    onApply = { applied += it },
                     onReset = { draft = RecipeSearchParams(query = draft.query) },
                 )
             }
@@ -68,6 +68,18 @@ class FilterSheetTest {
 
         composeRule.onNodeWithText("rice").assertExists()
         assertEquals(setOf("rice"), applied.single().includeIngredients)
+    }
+
+    @Test
+    fun ingredientTypedWithoutPressingDoneIsAppliedToo() {
+        setContent()
+
+        val field = composeRule.onNode(hasText("Must include") and hasSetTextAction())
+        field.performScrollTo()
+        field.performTextInput("Garlic")
+        composeRule.onNodeWithText("Apply").performScrollTo().performClick()
+
+        assertEquals(setOf("garlic"), applied.single().includeIngredients)
     }
 
     @Test
