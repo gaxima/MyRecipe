@@ -1,0 +1,356 @@
+{
+  "recipes": [
+    {
+      "id": "r-001",
+      "title": "Creamy Garlic Pasta",
+      "description": "A quick weeknight pasta tossed in a silky garlic and parmesan sauce.",
+      "servings": 4,
+      "image_url": "https://www.themealdb.com/images/media/meals/llcbn01574260722.jpg",
+      "dietary_attributes": ["vegetarian"],
+      "ingredients": [
+        { "name": "spaghetti", "quantity": "400 g" },
+        { "name": "garlic", "quantity": "6 cloves" },
+        { "name": "butter", "quantity": "40 g" },
+        { "name": "double cream", "quantity": "200 ml" },
+        { "name": "parmesan", "quantity": "60 g" },
+        { "name": "parsley", "quantity": "a handful" }
+      ],
+      "instructions": [
+        "Boil the spaghetti in well-salted water until al dente, then reserve a mug of pasta water.",
+        "Meanwhile, melt the butter in a large pan and gently fry the sliced garlic until fragrant but not browned.",
+        "Pour in the cream, bring to a gentle simmer and stir in most of the parmesan.",
+        "Toss the drained pasta in the sauce, loosening with pasta water until glossy.",
+        "Serve topped with parsley, black pepper and the remaining parmesan."
+      ]
+    },
+    {
+      "id": "r-002",
+      "title": "Chicken Curry",
+      "description": "A fragrant, creamy coconut curry that is even better the next day.",
+      "servings": 4,
+      "image_url": "https://www.themealdb.com/images/media/meals/vwrpps1503068729.jpg",
+      "dietary_attributes": ["gluten_free"],
+      "ingredients": [
+        { "name": "chicken thighs", "quantity": "600 g" },
+        { "name": "rice", "quantity": "300 g" },
+        { "name": "coconut milk", "quantity": "400 ml" },
+        { "name": "red curry paste", "quantity": "3 tbsp" },
+        { "name": "onion", "quantity": "1" },
+        { "name": "spinach", "quantity": "100 g" }
+      ],
+      "instructions": [
+        "Fry the chopped onion in a little oil until soft, then stir in the curry paste for a minute.",
+        "Add the diced chicken and cook until sealed on all sides.",
+        "Pour in the coconut milk and simmer for 20 minutes until the chicken is cooked through.",
+        "Meanwhile, cook the rice according to the packet instructions.",
+        "Stir the spinach into the curry until wilted and serve with the rice."
+      ]
+    },
+    {
+      "id": "r-003",
+      "title": "Veggie Stir-fry",
+      "description": "Crispy tofu and broccoli in a sticky soy glaze, ready in 20 minutes.",
+      "servings": 2,
+      "image_url": "https://www.themealdb.com/images/media/meals/minfsc1763766806.jpg",
+      "dietary_attributes": ["vegan", "dairy_free"],
+      "ingredients": [
+        { "name": "firm tofu", "quantity": "280 g" },
+        { "name": "broccoli", "quantity": "1 head" },
+        { "name": "soy sauce", "quantity": "3 tbsp" },
+        { "name": "rice", "quantity": "150 g" },
+        { "name": "ginger", "quantity": "a thumb-sized piece" },
+        { "name": "maple syrup", "quantity": "1 tbsp" }
+      ],
+      "instructions": [
+        "Cook the rice and keep it warm.",
+        "Press the tofu dry, cut into cubes and fry in a hot wok until golden on all sides.",
+        "Add the broccoli florets and grated ginger and stir-fry for 3 minutes.",
+        "Pour in the soy sauce and maple syrup and toss until everything is glazed.",
+        "Serve over the rice."
+      ]
+    },
+    {
+      "id": "r-004",
+      "title": "Peanut Noodles",
+      "description": "Slurpable noodles in a nutty, tangy sauce. Great hot or cold.",
+      "servings": 2,
+      "image_url": "https://www.themealdb.com/images/media/meals/2wx8cm1763373419.jpg",
+      "dietary_attributes": ["vegan", "dairy_free"],
+      "ingredients": [
+        { "name": "wheat noodles", "quantity": "200 g" },
+        { "name": "peanut butter", "quantity": "3 tbsp" },
+        { "name": "soy sauce", "quantity": "2 tbsp" },
+        { "name": "lime", "quantity": "1" },
+        { "name": "spring onions", "quantity": "3" },
+        { "name": "cucumber", "quantity": "half" }
+      ],
+      "instructions": [
+        "Boil the noodles until just tender, then rinse under cold water.",
+        "Whisk the peanut butter, soy sauce and lime juice with a splash of hot water until smooth.",
+        "Toss the noodles with the sauce.",
+        "Top with sliced spring onions and cucumber matchsticks."
+      ]
+    },
+    {
+      "id": "r-005",
+      "title": "Roast Chicken with Potatoes",
+      "description": "The Sunday classic: crisp skin, juicy meat and potatoes roasted in the drippings.",
+      "servings": 6,
+      "image_url": "https://www.themealdb.com/images/media/meals/nlxald1764112200.jpg",
+      "dietary_attributes": ["gluten_free", "dairy_free"],
+      "ingredients": [
+        { "name": "whole chicken", "quantity": "1.8 kg" },
+        { "name": "potatoes", "quantity": "1 kg" },
+        { "name": "rosemary", "quantity": "4 sprigs" },
+        { "name": "garlic", "quantity": "1 bulb" },
+        { "name": "lemon", "quantity": "1" },
+        { "name": "olive oil", "quantity": "3 tbsp" }
+      ],
+      "instructions": [
+        "Heat the oven to 200°C.",
+        "Stuff the chicken with the halved lemon and rosemary, then rub with oil and salt.",
+        "Toss the chopped potatoes and garlic cloves in oil and arrange them around the chicken.",
+        "Roast in the oven for about 1 hour 20 minutes, until the juices run clear.",
+        "Rest the chicken for 15 minutes before carving."
+      ]
+    },
+    {
+      "id": "r-006",
+      "title": "Margherita Pizza",
+      "description": "Homemade pizza with a blistered crust, tomato, mozzarella and basil.",
+      "servings": 2,
+      "image_url": "https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg",
+      "dietary_attributes": ["vegetarian"],
+      "ingredients": [
+        { "name": "strong white flour", "quantity": "300 g" },
+        { "name": "dried yeast", "quantity": "7 g" },
+        { "name": "tomato passata", "quantity": "150 ml" },
+        { "name": "mozzarella", "quantity": "125 g" },
+        { "name": "basil", "quantity": "a few leaves" },
+        { "name": "olive oil", "quantity": "1 tbsp" }
+      ],
+      "instructions": [
+        "Mix the flour, yeast, a pinch of salt and 200 ml warm water into a dough and knead for 10 minutes.",
+        "Leave to rise for 1 hour, then heat the oven to its highest setting.",
+        "Stretch the dough into two thin bases and spread with passata.",
+        "Top with torn mozzarella and bake in the oven for 8–10 minutes until blistered.",
+        "Finish with basil and a drizzle of olive oil."
+      ]
+    },
+    {
+      "id": "r-007",
+      "title": "Beef Tacos",
+      "description": "Spiced beef in warm tortillas with all the fresh toppings.",
+      "servings": 4,
+      "image_url": "https://www.themealdb.com/images/media/meals/ypxvwv1505333929.jpg",
+      "dietary_attributes": [],
+      "ingredients": [
+        { "name": "beef mince", "quantity": "500 g" },
+        { "name": "corn tortillas", "quantity": "8" },
+        { "name": "cheddar", "quantity": "100 g" },
+        { "name": "lime", "quantity": "1" },
+        { "name": "smoked paprika", "quantity": "2 tsp" },
+        { "name": "tomatoes", "quantity": "2" }
+      ],
+      "instructions": [
+        "Brown the beef in a hot pan, breaking it up as it cooks.",
+        "Stir in the paprika, a pinch of cumin and a splash of water; cook for 5 minutes.",
+        "Warm the tortillas in a dry pan.",
+        "Fill with the beef, chopped tomatoes and grated cheddar, and squeeze over the lime."
+      ]
+    },
+    {
+      "id": "r-008",
+      "title": "Grilled Lemon Salmon",
+      "description": "Charred salmon fillets with lemon and garlic. Light, quick and healthy.",
+      "servings": 2,
+      "image_url": "https://www.themealdb.com/images/media/meals/xxyupu1468262513.jpg",
+      "dietary_attributes": ["gluten_free", "dairy_free"],
+      "ingredients": [
+        { "name": "salmon fillets", "quantity": "2" },
+        { "name": "lemon", "quantity": "1" },
+        { "name": "garlic", "quantity": "2 cloves" },
+        { "name": "olive oil", "quantity": "1 tbsp" },
+        { "name": "dill", "quantity": "a small bunch" }
+      ],
+      "instructions": [
+        "Mix the lemon zest and juice, crushed garlic, oil and chopped dill.",
+        "Marinate the salmon for 10 minutes.",
+        "Heat the grill to high and grill the salmon skin-side up for 6–8 minutes.",
+        "Serve with lemon wedges."
+      ]
+    },
+    {
+      "id": "r-009",
+      "title": "Greek Salad",
+      "description": "Crunchy, salty and fresh. No cooking required.",
+      "servings": 2,
+      "image_url": "https://www.themealdb.com/images/media/meals/k29viq1585565980.jpg",
+      "dietary_attributes": ["vegetarian", "gluten_free"],
+      "ingredients": [
+        { "name": "cucumber", "quantity": "1" },
+        { "name": "tomatoes", "quantity": "4" },
+        { "name": "feta", "quantity": "200 g" },
+        { "name": "kalamata olives", "quantity": "a handful" },
+        { "name": "red onion", "quantity": "half" },
+        { "name": "oregano", "quantity": "1 tsp" }
+      ],
+      "instructions": [
+        "No cooking needed: chop the cucumber and tomatoes into chunks.",
+        "Thinly slice the red onion and add it with the olives.",
+        "Top with a slab of feta, sprinkle with oregano and drizzle with olive oil."
+      ]
+    },
+    {
+      "id": "r-010",
+      "title": "Red Lentil Soup",
+      "description": "A thick, warming soup made from store-cupboard staples.",
+      "servings": 6,
+      "image_url": "https://www.themealdb.com/images/media/meals/wuxrtu1483564410.jpg",
+      "dietary_attributes": ["vegan", "gluten_free", "dairy_free"],
+      "ingredients": [
+        { "name": "red lentils", "quantity": "300 g" },
+        { "name": "carrot", "quantity": "2" },
+        { "name": "onion", "quantity": "1" },
+        { "name": "vegetable stock", "quantity": "1.5 l" },
+        { "name": "cumin", "quantity": "2 tsp" },
+        { "name": "lemon", "quantity": "half" }
+      ],
+      "instructions": [
+        "Soften the chopped onion and carrot in a large pot with a little oil.",
+        "Stir in the cumin, then add the rinsed lentils and stock.",
+        "Simmer for 25 minutes until the lentils collapse.",
+        "Blend until smooth and season with lemon juice and salt."
+      ]
+    },
+    {
+      "id": "r-011",
+      "title": "Mushroom Risotto",
+      "description": "Creamy, comforting risotto with earthy mushrooms and parmesan.",
+      "servings": 4,
+      "image_url": "https://www.themealdb.com/images/media/meals/xxrxux1503070723.jpg",
+      "dietary_attributes": ["vegetarian", "gluten_free"],
+      "ingredients": [
+        { "name": "arborio rice", "quantity": "300 g" },
+        { "name": "chestnut mushrooms", "quantity": "300 g" },
+        { "name": "vegetable stock", "quantity": "1 l" },
+        { "name": "parmesan", "quantity": "50 g" },
+        { "name": "shallots", "quantity": "2" },
+        { "name": "butter", "quantity": "30 g" }
+      ],
+      "instructions": [
+        "Fry the sliced mushrooms in half the butter until golden, then set aside.",
+        "Soften the shallots, add the rice and stir for a minute.",
+        "Add the hot stock a ladle at a time, stirring until each is absorbed, for about 18 minutes.",
+        "Stir in the mushrooms, parmesan and remaining butter and rest for 2 minutes."
+      ]
+    },
+    {
+      "id": "r-012",
+      "title": "Fluffy Pancakes",
+      "description": "Thick American-style pancakes for a lazy weekend breakfast.",
+      "servings": 4,
+      "image_url": "https://www.themealdb.com/images/media/meals/rwuyqx1511383174.jpg",
+      "dietary_attributes": ["vegetarian"],
+      "ingredients": [
+        { "name": "plain flour", "quantity": "200 g" },
+        { "name": "eggs", "quantity": "2" },
+        { "name": "milk", "quantity": "300 ml" },
+        { "name": "baking powder", "quantity": "2 tsp" },
+        { "name": "maple syrup", "quantity": "to serve" }
+      ],
+      "instructions": [
+        "Whisk the flour, baking powder and a pinch of salt in a bowl.",
+        "Beat in the eggs and milk to make a thick batter.",
+        "Cook ladlefuls in a lightly oiled pan over a medium heat until bubbles appear, then flip.",
+        "Serve stacked with maple syrup."
+      ]
+    },
+    {
+      "id": "r-013",
+      "title": "Shakshuka",
+      "description": "Eggs gently poached in a spiced tomato and pepper sauce.",
+      "servings": 3,
+      "image_url": "https://www.themealdb.com/images/media/meals/g373701551450225.jpg",
+      "dietary_attributes": ["vegetarian", "gluten_free"],
+      "ingredients": [
+        { "name": "eggs", "quantity": "6" },
+        { "name": "chopped tomatoes", "quantity": "800 g" },
+        { "name": "red peppers", "quantity": "2" },
+        { "name": "onion", "quantity": "1" },
+        { "name": "cumin", "quantity": "1 tsp" },
+        { "name": "smoked paprika", "quantity": "1 tsp" }
+      ],
+      "instructions": [
+        "Soften the sliced onion and peppers in a deep frying pan.",
+        "Add the spices, then the tomatoes, and simmer for 10 minutes until thick.",
+        "Make six wells in the sauce and crack an egg into each.",
+        "Cover and simmer for 6–8 minutes until the whites are set."
+      ]
+    },
+    {
+      "id": "r-014",
+      "title": "Chicken Satay Skewers",
+      "description": "Smoky grilled chicken skewers with a rich peanut dipping sauce.",
+      "servings": 4,
+      "image_url": "https://www.themealdb.com/images/media/meals/3um6il1763794322.jpg",
+      "dietary_attributes": ["gluten_free", "dairy_free"],
+      "ingredients": [
+        { "name": "chicken breast", "quantity": "600 g" },
+        { "name": "peanut butter", "quantity": "4 tbsp" },
+        { "name": "coconut milk", "quantity": "100 ml" },
+        { "name": "tamari", "quantity": "2 tbsp" },
+        { "name": "lime", "quantity": "1" },
+        { "name": "garlic", "quantity": "2 cloves" }
+      ],
+      "instructions": [
+        "Cut the chicken into strips and marinate in tamari, garlic and lime for 30 minutes.",
+        "Thread onto skewers and grill for 8–10 minutes, turning halfway.",
+        "Warm the peanut butter with the coconut milk to make the sauce.",
+        "Serve the skewers with the sauce for dipping."
+      ]
+    },
+    {
+      "id": "r-015",
+      "title": "Fudgy Chocolate Brownies",
+      "description": "Dense, gooey brownies with a crackly top. Perfect for sharing.",
+      "servings": 8,
+      "image_url": "https://www.themealdb.com/images/media/meals/yypvst1511386427.jpg",
+      "dietary_attributes": ["vegetarian"],
+      "ingredients": [
+        { "name": "dark chocolate", "quantity": "200 g" },
+        { "name": "butter", "quantity": "175 g" },
+        { "name": "eggs", "quantity": "3" },
+        { "name": "caster sugar", "quantity": "250 g" },
+        { "name": "plain flour", "quantity": "90 g" },
+        { "name": "cocoa powder", "quantity": "40 g" }
+      ],
+      "instructions": [
+        "Heat the oven to 180°C and line a square tin.",
+        "Melt the chocolate and butter together, then let cool slightly.",
+        "Whisk the eggs and sugar until pale and thick, then fold in the chocolate.",
+        "Sift in the flour and cocoa, fold gently and pour into the tin.",
+        "Bake in the oven for 25 minutes; cool completely before cutting."
+      ]
+    },
+    {
+      "id": "r-016",
+      "title": "Avocado Toast",
+      "description": "Smashed avocado on crunchy sourdough with a kick of chilli. Breakfast for one.",
+      "servings": 1,
+      "image_url": "https://www.themealdb.com/images/media/meals/flrajf1762341295.jpg",
+      "dietary_attributes": ["vegan", "dairy_free"],
+      "ingredients": [
+        { "name": "sourdough bread", "quantity": "2 slices" },
+        { "name": "avocado", "quantity": "1" },
+        { "name": "lime", "quantity": "half" },
+        { "name": "chilli flakes", "quantity": "a pinch" }
+      ],
+      "instructions": [
+        "Toast the sourdough until golden.",
+        "Mash the avocado with lime juice and a pinch of salt.",
+        "Spread over the toast and finish with chilli flakes."
+      ]
+    }
+  ]
+}
