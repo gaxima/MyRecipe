@@ -13,11 +13,15 @@ import java.io.File
 /** Guards the mock data we ship: a typo in recipes.json would otherwise only show up at runtime. */
 class BundledRecipesJsonTest {
 
-    private val dtos: List<RecipeDto> = Json { ignoreUnknownKeys = true }
+    private val dtos: List<RecipeDto> = json
         .decodeFromString<RecipesResponseDto>(File("src/main/assets/recipes.json").readText())
         .recipes.orEmpty()
 
     private val filter = RecipeFilter()
+
+    private companion object {
+        val json = Json { ignoreUnknownKeys = true }
+    }
 
     private fun count(
         vegetarian: Boolean? = null,
