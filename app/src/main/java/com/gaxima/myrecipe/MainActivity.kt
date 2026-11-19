@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.Text
+import com.gaxima.myrecipe.navigation.RecipeNavigation
+import com.gaxima.myrecipe.presentation.theme.MyRecipeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -13,7 +14,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Text("MyRecipe")
+            MyRecipeTheme {
+                RecipeNavigation()
+            }
         }
     }
 }
