@@ -30,6 +30,23 @@
     <string name="filter_exclude">No %s</string>
     <string name="filter_instructions">Steps: “%s”</string>
 
+    <!-- Filter sheet -->
+    <string name="filters_title">Filters</string>
+    <string name="filter_vegetarian_only">Vegetarian only</string>
+    <string name="filter_vegetarian_only_hint">Includes vegan recipes</string>
+    <string name="servings_label">Servings</string>
+    <string name="servings_any">Any</string>
+    <string name="servings_value_range">%1$d–%2$d</string>
+    <string name="servings_value_min">%d+</string>
+    <string name="include_label">Must include</string>
+    <string name="exclude_label">Must not include</string>
+    <string name="ingredient_hint">Add an ingredient</string>
+    <string name="instructions_label">Instructions contain</string>
+    <string name="instructions_hint">e.g. oven, grill, wok</string>
+    <string name="cd_remove_ingredient">Remove %s</string>
+    <string name="reset">Reset</string>
+    <string name="apply">Apply</string>
+
     <plurals name="servings_count">
         <item quantity="one">%d serving</item>
         <item quantity="other">%d servings</item>

@@ -1,10 +1,17 @@
 package com.gaxima.myrecipe.presentation.list
 
+import androidx.compose.runtime.saveable.Saver
 import com.gaxima.myrecipe.domain.model.RecipeSearchParams
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 internal const val SEARCH_PARAMS_KEY = "search_params"
+
+/** For `rememberSaveable(stateSaver = SearchParamsStateSaver)`: keeps a draft across rotation. */
+internal val SearchParamsStateSaver: Saver<RecipeSearchParams, String> = Saver(
+    save = { it.encode() },
+    restore = { decodeSearchParams(it) },
+)
 
 /**
  * Bundle-friendly form of [RecipeSearchParams] for `SavedStateHandle` / `rememberSaveable`.
