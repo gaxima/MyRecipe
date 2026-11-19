@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">MyRecipe</string>
+
+    <!-- Errors -->
+    <string name="error_recipe_not_found">This recipe could not be found.</string>
+    <string name="error_network">Couldn\'t reach the server. Check your connection and try again.</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="retry">Retry</string>
+
+    <!-- Dietary attributes -->
+    <string name="dietary_vegetarian">Vegetarian</string>
+    <string name="dietary_vegan">Vegan</string>
+    <string name="dietary_gluten_free">Gluten-free</string>
+    <string name="dietary_dairy_free">Dairy-free</string>
+
+    <plurals name="servings_count">
+        <item quantity="one">%d serving</item>
+        <item quantity="other">%d servings</item>
+    </plurals>
 </resources>
