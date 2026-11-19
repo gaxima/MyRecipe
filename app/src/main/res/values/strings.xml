@@ -13,6 +13,23 @@
     <string name="dietary_gluten_free">Gluten-free</string>
     <string name="dietary_dairy_free">Dairy-free</string>
 
+    <!-- Recipe list -->
+    <string name="search_hint">Search recipes</string>
+    <string name="cd_clear_search">Clear search</string>
+    <string name="cd_filters">Filters</string>
+    <string name="cd_remove_filter">Remove filter %s</string>
+    <string name="empty_title">No recipes match your search</string>
+    <string name="empty_body">Try different words or fewer filters.</string>
+    <string name="clear_filters">Clear filters</string>
+
+    <!-- Active filter chips -->
+    <string name="filter_vegetarian">Vegetarian</string>
+    <string name="filter_servings_range">%1$d–%2$d servings</string>
+    <string name="filter_servings_min">%d+ servings</string>
+    <string name="filter_include">With %s</string>
+    <string name="filter_exclude">No %s</string>
+    <string name="filter_instructions">Steps: “%s”</string>
+
     <plurals name="servings_count">
         <item quantity="one">%d serving</item>
         <item quantity="other">%d servings</item>
