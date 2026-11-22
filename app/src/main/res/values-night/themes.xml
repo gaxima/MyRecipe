@@ -1,0 +1,4 @@
+<resources>
+    <!-- Dark window background before Compose draws, so dark mode does not flash white on launch. -->
+    <style name="Theme.MyRecipe" parent="android:Theme.Material.NoActionBar" />
+</resources>

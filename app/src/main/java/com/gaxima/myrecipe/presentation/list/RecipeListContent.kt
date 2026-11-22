@@ -114,7 +114,7 @@ private fun EmptyResults(onClearFilters: () -> Unit) {
     ) {
         Text(stringResource(R.string.empty_title), style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center)
         Text(stringResource(R.string.empty_body), style = MaterialTheme.typography.bodyMedium, textAlign = TextAlign.Center)
-        OutlinedButton(onClick = onClearFilters) { Text(stringResource(R.string.clear_filters)) }
+        OutlinedButton(onClick = onClearFilters) { Text(stringResource(R.string.clear_search_and_filters)) }
     }
 }
 

@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.test.assertHeightIsAtLeast
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createComposeRule
@@ -12,6 +13,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.gaxima.myrecipe.domain.model.RecipeSearchParams
 import com.gaxima.myrecipe.presentation.theme.MyRecipeTheme
@@ -57,6 +59,13 @@ class FilterSheetTest {
         composeRule.onNodeWithText("Apply").performScrollTo().performClick()
 
         assertEquals(true, applied.single().vegetarianOnly)
+    }
+
+    @Test
+    fun vegetarianRowIsAtLeastTheMinimumTouchTargetHeight() {
+        setContent()
+
+        composeRule.onNodeWithText("Vegetarian only").assertHeightIsAtLeast(48.dp)
     }
 
     @Test

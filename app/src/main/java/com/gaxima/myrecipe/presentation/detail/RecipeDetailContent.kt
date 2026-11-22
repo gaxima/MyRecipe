@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.paneTitle
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -56,8 +57,15 @@ fun RecipeDetailContent(
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // The top bar shows no title (the full one wraps below the image), so the screen is
+    // named for TalkBack here; it is announced when the screen opens.
+    val screenModifier = if (state is RecipeDetailUiState.Success) {
+        modifier.semantics { paneTitle = state.recipe.title }
+    } else {
+        modifier
+    }
     Scaffold(
-        modifier = modifier,
+        modifier = screenModifier,
         topBar = {
             TopAppBar(
                 title = {},
@@ -123,17 +131,21 @@ private fun RecipeDetailBody(recipe: Recipe, modifier: Modifier = Modifier) {
             }
         }
 
-        SectionTitle(stringResource(R.string.ingredients_title))
-        Column {
-            recipe.ingredients.forEachIndexed { index, ingredient ->
-                if (index > 0) HorizontalDivider()
-                IngredientRow(ingredient)
+        if (recipe.ingredients.isNotEmpty()) {
+            SectionTitle(stringResource(R.string.ingredients_title))
+            Column {
+                recipe.ingredients.forEachIndexed { index, ingredient ->
+                    if (index > 0) HorizontalDivider()
+                    IngredientRow(ingredient)
+                }
             }
         }
 
-        SectionTitle(stringResource(R.string.instructions_title))
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(bottom = 16.dp)) {
-            recipe.instructions.forEachIndexed { index, step -> InstructionStep(number = index + 1, text = step) }
+        if (recipe.instructions.isNotEmpty()) {
+            SectionTitle(stringResource(R.string.instructions_title))
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp), modifier = Modifier.padding(bottom = 16.dp)) {
+                recipe.instructions.forEachIndexed { index, step -> InstructionStep(number = index + 1, text = step) }
+            }
         }
     }
 }
@@ -152,6 +164,7 @@ private fun IngredientRow(ingredient: Ingredient) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .semantics(mergeDescendants = true) {} // read as "spaghetti, 400 g"
             .padding(vertical = 10.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -169,7 +182,10 @@ private fun IngredientRow(ingredient: Ingredient) {
 
 @Composable
 private fun InstructionStep(number: Int, text: String) {
-    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        modifier = Modifier.semantics(mergeDescendants = true) {}, // number read with its step
+    ) {
         Surface(shape = CircleShape, color = MaterialTheme.colorScheme.primaryContainer, modifier = Modifier.size(28.dp)) {
             Box(contentAlignment = Alignment.Center) {
                 Text(text = number.toString(), style = MaterialTheme.typography.labelLarge)

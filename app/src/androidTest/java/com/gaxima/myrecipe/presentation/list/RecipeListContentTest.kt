@@ -1,8 +1,10 @@
 package com.gaxima.myrecipe.presentation.list
 
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.ui.test.hasContentDescription
 import androidx.compose.ui.test.hasSetTextAction
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performImeAction
@@ -65,13 +67,27 @@ class RecipeListContentTest {
     }
 
     @Test
-    fun emptyResultsShowClearFiltersWhichSendsAction() {
+    fun emptyResultsButtonClearsSearchAndFilters() {
         setContent(RecipeListUiState(results = RecipeResultsState.Success(emptyList())))
 
         composeRule.onNodeWithText("No recipes match your search").assertExists()
-        composeRule.onNodeWithText("Clear filters").performClick()
+        composeRule.onNodeWithText("Clear search and filters").performClick()
 
         assertEquals(RecipeListAction.ClearAllFilters, actions.last())
+    }
+
+    @Test
+    fun searchFieldKeepsItsAccessibleNameAfterTyping() {
+        setContent(successState().copy(searchText = "pasta"))
+
+        composeRule.onNode(hasSetTextAction() and hasContentDescription("Search recipes")).assertExists()
+    }
+
+    @Test
+    fun filterButtonAnnouncesHowManyFiltersAreActive() {
+        setContent(successState(RecipeSearchParams(vegetarianOnly = true, excludeIngredients = setOf("peanut"))))
+
+        composeRule.onNodeWithContentDescription("Filters, 2 active").assertExists()
     }
 
     @Test

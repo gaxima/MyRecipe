@@ -18,7 +18,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.gaxima.myrecipe.R
@@ -38,6 +42,7 @@ fun RecipeSearchBar(
     modifier: Modifier = Modifier,
 ) {
     val keyboard = LocalSoftwareKeyboardController.current
+    val hint = stringResource(R.string.search_hint)
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -46,8 +51,11 @@ fun RecipeSearchBar(
         OutlinedTextField(
             value = text,
             onValueChange = onTextChange,
-            modifier = Modifier.weight(1f),
-            placeholder = { Text(stringResource(R.string.search_hint)) },
+            // The placeholder disappears once text is typed; this keeps the field named for TalkBack.
+            modifier = Modifier
+                .weight(1f)
+                .semantics { contentDescription = hint },
+            placeholder = { Text(hint) },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
             trailingIcon = {
                 if (text.isNotEmpty()) {
@@ -68,12 +76,18 @@ fun RecipeSearchBar(
         BadgedBox(
             badge = {
                 if (activeFilterCount > 0) {
-                    Badge { Text(activeFilterCount.toString()) }
+                    // The count is announced by the button's description instead.
+                    Badge(modifier = Modifier.clearAndSetSemantics {}) { Text(activeFilterCount.toString()) }
                 }
             },
         ) {
+            val description = if (activeFilterCount > 0) {
+                pluralStringResource(R.plurals.cd_filters_active, activeFilterCount, activeFilterCount)
+            } else {
+                stringResource(R.string.cd_filters)
+            }
             IconButton(onClick = onFilterClick) {
-                Icon(painterResource(R.drawable.ic_filter_list), contentDescription = stringResource(R.string.cd_filters))
+                Icon(painterResource(R.drawable.ic_filter_list), contentDescription = description)
             }
         }
     }

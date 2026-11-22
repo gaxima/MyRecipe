@@ -20,7 +20,7 @@
     <string name="cd_remove_filter">Remove filter %s</string>
     <string name="empty_title">No recipes match your search</string>
     <string name="empty_body">Try different words or fewer filters.</string>
-    <string name="clear_filters">Clear filters</string>
+    <string name="clear_search_and_filters">Clear search and filters</string>
 
     <!-- Active filter chips -->
     <string name="filter_vegetarian">Vegetarian</string>
@@ -52,6 +52,11 @@
     <string name="cd_back">Back</string>
     <string name="ingredients_title">Ingredients</string>
     <string name="instructions_title">Instructions</string>
+
+    <plurals name="cd_filters_active">
+        <item quantity="one">Filters, %d active</item>
+        <item quantity="other">Filters, %d active</item>
+    </plurals>
 
     <plurals name="servings_count">
         <item quantity="one">%d serving</item>

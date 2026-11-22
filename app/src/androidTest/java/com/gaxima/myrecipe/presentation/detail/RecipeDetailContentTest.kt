@@ -1,5 +1,8 @@
 package com.gaxima.myrecipe.presentation.detail
 
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.test.SemanticsMatcher
+import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
@@ -43,6 +46,36 @@ class RecipeDetailContentTest {
         }
         composeRule.onNodeWithText("1").performScrollTo().assertExists()
         composeRule.onNodeWithText(recipe.instructions.first()).assertExists()
+    }
+
+    @Test
+    fun emptyIngredientsAndInstructionsHideTheirHeadings() {
+        setContent(RecipeDetailUiState.Success(recipe.copy(ingredients = emptyList(), instructions = emptyList())))
+
+        composeRule.onNodeWithText("Ingredients").assertDoesNotExist()
+        composeRule.onNodeWithText("Instructions").assertDoesNotExist()
+    }
+
+    @Test
+    fun stepNumberIsReadTogetherWithItsText() {
+        setContent(RecipeDetailUiState.Success(recipe))
+
+        composeRule.onNode(hasText("1") and hasText(recipe.instructions.first())).performScrollTo().assertExists()
+    }
+
+    @Test
+    fun ingredientNameIsReadTogetherWithItsQuantity() {
+        val ingredient = recipe.ingredients.first { it.quantity != null }
+        setContent(RecipeDetailUiState.Success(recipe))
+
+        composeRule.onNode(hasText(ingredient.name) and hasText(ingredient.quantity!!)).performScrollTo().assertExists()
+    }
+
+    @Test
+    fun screenIsTitledWithTheRecipeNameForAccessibility() {
+        setContent(RecipeDetailUiState.Success(recipe))
+
+        composeRule.onNode(SemanticsMatcher.expectValue(SemanticsProperties.PaneTitle, recipe.title)).assertExists()
     }
 
     @Test
