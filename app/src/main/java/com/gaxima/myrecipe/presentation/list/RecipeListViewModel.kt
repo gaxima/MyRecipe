@@ -49,15 +49,17 @@ class RecipeListViewModel @Inject constructor(
     fun onAction(action: RecipeListAction) {
         val state = _uiState.value
         val params = state.appliedParams
+        // Filter changes search with what is in the field, even if Search was never pressed.
+        val typedQuery = state.searchText.trim()
         when (action) {
             is RecipeListAction.SearchTextChange -> _uiState.update { it.copy(searchText = action.text) }
-            RecipeListAction.Search -> search(params.copy(query = state.searchText.trim()))
+            RecipeListAction.Search -> search(params.copy(query = typedQuery))
             RecipeListAction.ClearSearch -> {
                 _uiState.update { it.copy(searchText = "") }
-                search(params.copy(query = ""))
+                if (params.query.isNotEmpty()) search(params.copy(query = ""))
             }
-            is RecipeListAction.ApplyFilters -> search(action.params.copy(query = params.query))
-            is RecipeListAction.RemoveFilter -> search(params.without(action.filter))
+            is RecipeListAction.ApplyFilters -> search(action.params.copy(query = typedQuery))
+            is RecipeListAction.RemoveFilter -> search(params.without(action.filter).copy(query = typedQuery))
             RecipeListAction.ClearAllFilters -> {
                 _uiState.update { it.copy(searchText = "") }
                 search(RecipeSearchParams())

@@ -97,6 +97,16 @@ class RecipeMapperTest {
     }
 
     @Test
+    fun `list mapping keeps only the first record of a duplicated id`() {
+        val dtos = listOf(recipeDto(id = "a", title = "First"), recipeDto(id = "b"), recipeDto(id = "a", title = "Second"))
+
+        val recipes = dtos.toDomain()
+
+        assertEquals(listOf("a", "b"), recipes.map { it.id })
+        assertEquals("First", recipes.first().title)
+    }
+
+    @Test
     fun `vegan recipe counts as vegetarian`() {
         assertTrue(recipeDto(dietary = listOf("vegan")).toDomainOrNull()!!.isVegetarian)
         assertFalse(recipeDto(dietary = emptyList()).toDomainOrNull()!!.isVegetarian)

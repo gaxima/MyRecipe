@@ -27,7 +27,8 @@ fun RecipeDto.toDomainOrNull(): Recipe? {
     )
 }
 
-fun List<RecipeDto>.toDomain(): List<Recipe> = mapNotNull { it.toDomainOrNull() }
+/** Maps every usable record; when an id repeats only its first record is kept, as ids must be unique. */
+fun List<RecipeDto>.toDomain(): List<Recipe> = mapNotNull { it.toDomainOrNull() }.distinctBy { it.id }
 
 private fun IngredientDto.toDomainOrNull(): Ingredient? {
     val name = name?.trim()?.takeIf { it.isNotEmpty() } ?: return null

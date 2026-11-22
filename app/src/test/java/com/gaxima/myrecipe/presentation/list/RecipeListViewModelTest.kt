@@ -89,6 +89,38 @@ class RecipeListViewModelTest {
     }
 
     @Test
+    fun `clear search without a searched query only clears the text`() {
+        val vm = viewModel()
+        vm.onAction(RecipeListAction.SearchTextChange("pas"))
+
+        vm.onAction(RecipeListAction.ClearSearch)
+
+        assertEquals("", vm.uiState.value.searchText)
+        assertEquals(1, repository.searchCalls.size)
+    }
+
+    @Test
+    fun `apply filters uses the typed text even when search was not pressed`() {
+        val vm = viewModel()
+        vm.onAction(RecipeListAction.SearchTextChange(" curry "))
+
+        vm.onAction(RecipeListAction.ApplyFilters(RecipeSearchParams(vegetarianOnly = true)))
+
+        assertEquals(RecipeSearchParams(query = "curry", vegetarianOnly = true), repository.searchCalls.last())
+    }
+
+    @Test
+    fun `remove filter uses the typed text even when search was not pressed`() {
+        val vm = viewModel()
+        vm.onAction(RecipeListAction.ApplyFilters(RecipeSearchParams(vegetarianOnly = true)))
+        vm.onAction(RecipeListAction.SearchTextChange("curry"))
+
+        vm.onAction(RecipeListAction.RemoveFilter(ActiveFilter.Vegetarian))
+
+        assertEquals(RecipeSearchParams(query = "curry"), repository.searchCalls.last())
+    }
+
+    @Test
     fun `apply filters keeps current query`() {
         val vm = viewModel()
         vm.onAction(RecipeListAction.SearchTextChange("pasta"))

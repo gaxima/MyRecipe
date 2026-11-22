@@ -28,16 +28,19 @@ import com.gaxima.myrecipe.domain.model.RecipeSearchParams
 /** Trimmed, lowercased ingredient name, or `null` when there is nothing to add. */
 fun normalizeIngredient(raw: String): String? = raw.trim().lowercase().takeIf { it.isNotEmpty() }
 
-/** Adds an ingredient to the include list, removing it from exclude so the search stays satisfiable. */
+/** Every ingredient in [raw], which may list several separated by commas ("chicken, rice"). */
+fun parseIngredients(raw: String): Set<String> = raw.split(',').mapNotNull(::normalizeIngredient).toSet()
+
+/** Adds ingredients to the include list, removing them from exclude so the search stays satisfiable. */
 fun RecipeSearchParams.withIncluded(raw: String): RecipeSearchParams {
-    val name = normalizeIngredient(raw) ?: return this
-    return copy(includeIngredients = includeIngredients + name, excludeIngredients = excludeIngredients - name)
+    val names = parseIngredients(raw).ifEmpty { return this }
+    return copy(includeIngredients = includeIngredients + names, excludeIngredients = excludeIngredients - names)
 }
 
-/** Adds an ingredient to the exclude list, removing it from include so the search stays satisfiable. */
+/** Adds ingredients to the exclude list, removing them from include so the search stays satisfiable. */
 fun RecipeSearchParams.withExcluded(raw: String): RecipeSearchParams {
-    val name = normalizeIngredient(raw) ?: return this
-    return copy(excludeIngredients = excludeIngredients + name, includeIngredients = includeIngredients - name)
+    val names = parseIngredients(raw).ifEmpty { return this }
+    return copy(excludeIngredients = excludeIngredients + names, includeIngredients = includeIngredients - names)
 }
 
 /** Commits ingredient text the user typed but did not add yet (no Done / + pressed). */

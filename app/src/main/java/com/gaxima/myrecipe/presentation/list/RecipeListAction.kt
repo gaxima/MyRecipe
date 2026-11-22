@@ -8,10 +8,13 @@ sealed interface RecipeListAction {
 
     /** IME "Search" pressed: searches with the typed text. */
     data object Search : RecipeListAction
+    /** ✕ pressed: empties the field, and searches again only if a query was applied. */
     data object ClearSearch : RecipeListAction
 
-    /** Applies the filter sheet's draft; the current query is kept. */
+    /** Applies the filter sheet's draft together with the text currently in the search field. */
     data class ApplyFilters(val params: RecipeSearchParams) : RecipeListAction
+
+    /** Removes one filter chip, searching with the text currently in the search field. */
     data class RemoveFilter(val filter: ActiveFilter) : RecipeListAction
 
     /** Resets the query and every filter. */

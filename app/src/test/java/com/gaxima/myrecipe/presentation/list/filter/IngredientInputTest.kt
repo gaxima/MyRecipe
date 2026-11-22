@@ -18,6 +18,21 @@ class IngredientInputTest {
     }
 
     @Test
+    fun `comma separated input adds each ingredient`() {
+        val params = RecipeSearchParams().withIncluded("Chicken, rice ,, garlic")
+
+        assertEquals(setOf("chicken", "rice", "garlic"), params.includeIngredients)
+    }
+
+    @Test
+    fun `comma separated exclude moves each ingredient out of include`() {
+        val params = RecipeSearchParams(includeIngredients = setOf("rice", "egg")).withExcluded("rice, peanut")
+
+        assertEquals(setOf("egg"), params.includeIngredients)
+        assertEquals(setOf("rice", "peanut"), params.excludeIngredients)
+    }
+
+    @Test
     fun `adding the same ingredient twice keeps one chip`() {
         val params = RecipeSearchParams().withIncluded("Chicken ").withIncluded("chicken")
 
