@@ -85,7 +85,7 @@ UI ◄──SharedFlow<Event>─── (snackbar on a failed refresh)
 
 - **The search runs in the (fake) API, not the UI.** The brief asks for a search *endpoint* with query filters, and real recipe APIs filter on the server because the catalogue is too big to download. `RecipeApi` looks like a Retrofit service; `FakeRecipeApi` is the only class that knows the data is local, and its query logic is a pure `RecipeFilter`. Using a real backend means writing one Retrofit implementation and changing one Hilt binding; `FakeRecipeApi` and `RecipeFilter` are deleted, and `domain` and `presentation` don't change. Filtering a fully loaded list in the ViewModel was the simpler alternative, but it doesn't satisfy the brief and puts query rules in the UI layer.
 - **A thin domain without use cases.** Use cases that only forward to the repository add files without adding behaviour. The domain layer still holds the models and the repository interface, which keeps API DTOs out of the UI and makes ViewModels easy to test with a fake repository.
-- **DTOs are nullable; the mapper is defensive.** A record without an id, title or positive servings is dropped instead of failing the whole list; missing lists become empty and unknown dietary values are ignored so new API values don't break the app.
+- **DTOs are nullable; the mapper is defensive.** A record without an id, title or positive servings is dropped instead of failing the whole list; a repeated id keeps only its first record (the grid needs unique keys); missing lists become empty and unknown dietary values are ignored so new API values don't break the app.
 - **Explicit search instead of search-as-you-type.** The search runs on the keyboard's *Search* action, when the text is cleared, and when filters change. There's no debounce logic, every search is a deliberate request, and the loading indicator matches what the user just did.
 - **`SharedFlow` only for events that can be lost.** A `SharedFlow` without replay drops events emitted while nothing collects (e.g. during rotation). So it only carries snackbars; anything that must survive lives in the `StateFlow`.
 - **Error policy.** A failed first load replaces the content with a full-screen error and *Retry*. A failed search while results are shown keeps them and shows a snackbar, because replacing a usable list with an error screen is worse.
@@ -103,6 +103,8 @@ UI ◄──SharedFlow<Event>─── (snackbar on a failed refresh)
 - **Servings is a range slider from 1 to 8+.** The full range means "any"; the top stop is open-ended.
 - **Ingredient quantities are display strings** ("400 g", "a pinch"). They are never used in calculations, so splitting amount and unit wasn't worth it.
 - **Adding an ingredient to one list removes it from the other**, so the user can't build a search that can never match.
+- **Ingredient fields accept comma-separated lists**: "chicken, rice" adds two chips.
+- **Filter changes use the text in the search field**, even if *Search* wasn't pressed, so a typed word is never silently ignored.
 - **Images are remote URLs** (TheMealDB) loaded with Coil, with a placeholder while loading and a fallback icon when there is no URL or the load fails. Some photos are the closest available dish rather than the exact recipe.
 - **The detail screen loads the recipe again by id** rather than receiving it from the list. That's one extra (fake) call, but it's how the screen would behave with a real API and deep links.
 
